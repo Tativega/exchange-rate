@@ -23,3 +23,5 @@ You will also see any lint errors in the console.
 -Mimic the functionality of protected routes, using a token saved in sessionStorage.
 
 -Shows latest price and the latest timestamp (in local time for the user) for the EUR/USD exchange rate from a websocket connection.
+
+-Login form design is based on the design made by Deepak Yadav that you can find at https://goo.gl/XRALsw
