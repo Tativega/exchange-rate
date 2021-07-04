@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 
 const MainContainer = styled.div`
@@ -29,87 +29,43 @@ height: 200px;
 justify-content: space-between;
 align-items: center;
 border-radius: 8px;
+@media (max-width: 425px) {
+    width: 200px;
+    height: 400px;
+    flex-direction: column;
+    margin: 0 auto;
+}
 `
 const Register = styled.div`
 cursor: pointer;
-padding: 10px 0 10px 100px
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 10px 0 10px 80px;
+flex-direction: column;
+span {
+    text-align: center;
+    font-size: 12px;
+}
+@media (max-width: 425px) {
+   padding: 15px;   
+}
 `
 const Login = styled.div`
 cursor: pointer;
-padding: 40px;
-padding: 10px 100px 10px 0;
-`
-
-const CardsWrapper = styled.div`
-background-color: #4d4d4d;
-position: absolute;
-top: 50%;
-width: 50%;
-height: 300px;
-animation: ${({ active }) => active === "register" ? bounceLeft : bounceRight} 1s forwards;
-border-radius: 8px;
-padding: 20px
-`
-
-const Card = styled.div`
-display: ${({ isactive }) => !isactive ? 'none' : 'flex'};
-flex-direction: column;
-align-items: center;
-`
-const RegisterCard = styled(Card)`
-display: ${({ isactive }) => !isactive ? 'none' : 'flex'};
-`
-const LoginCard = styled(Card)`
-display: ${({ isactive }) => !isactive ? 'none' : 'flex'};
-`
-const Button = styled.div`
-background-color: #f44336;
-width: 40%;
-border-radius: 5px;
-padding: 5px;
+padding: 10px 75px 10px 0;
 display: flex;
-align-items: center;
 justify-content: center;
-margin-top: 15px
-`
-
-const Input = styled.input`
-height: 30px;
-margin-top: 15px;
-border: none;
-border-radius: 5px;
-padding: 5px 15px
-`
-
-const bounceLeft = keyframes`
-0% {
-    transform: translate3d(100%, -50%, 0)
-}
-
-50% {
-    transform: translate3d(-30px, -50%, 0)
-}
-
-100% {
-    transform: translate3d(0, -50%, 0)
-}
-`
-
-const bounceRight = keyframes`
-  0% {
-      transform: translate3d(0, -50%, 0)
+align-items: center;
+flex-direction: column;
+    span {
+        text-align: center;
+        font-size: 12px;
     }
+@media (max-width: 425px) {
+    padding: 15px;
     
-
-  50% {
-      transform: translate3d(calc(250px + 30px), -50%, 0)
-    }
-    
-
-  100% {
-      transform: translate3d(100%, -50%, 0)
-    }
-   
+ }
 `
-
-export default { MainContainer, FormContainer, Register, Login, CardsWrapper, RegisterCard, LoginCard, Button, Input, Logo }
+// eslint-disable-next-line
+export default { MainContainer, FormContainer, Register, Login, Logo }
