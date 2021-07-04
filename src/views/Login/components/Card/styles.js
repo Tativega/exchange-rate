@@ -38,6 +38,9 @@ align-items: center;
 justify-content: center;
 margin-top: 15px
 `
+const RecoverButton = styled.h5`
+cursor: pointer;
+`
 
 const Input = styled.input`
 height: 30px;
@@ -99,5 +102,4 @@ const bounceBottom = keyframes`
 }
    
 `
-// eslint-disable-next-line
-export default { CardsWrapper, RegisterCard, LoginCard, Button, Input }
+export default { CardsWrapper, RegisterCard, LoginCard, Button, Input, RecoverButton }

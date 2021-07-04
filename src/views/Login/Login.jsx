@@ -1,10 +1,12 @@
 import styles from "./styles";
-import Card from "./components/Card";
+import Card from "./components/Card/Card";
+import RecoveryPassword from "./components/RecoveryPassword";
 import { useState, useReducer } from "react";
 import { loginReducer, registerReducer } from "./reducer";
 
 const Login = () => {
   const [active, setActive] = useState("login");
+  const [openModal, setOpenModal] = useState(false);
 
   const register = { name: "", email: "", password: "", confirmpassword: "" };
   const login = { email: "", password: "" };
@@ -35,6 +37,7 @@ const Login = () => {
         </styles.Login>
         <Card
           active={active}
+          handleModal={setOpenModal}
           register={registerState}
           login={loginState}
           handleLogin={loginDispatch}
@@ -42,6 +45,7 @@ const Login = () => {
           changeForm={setActive}
         />
       </styles.FormContainer>
+      {openModal && <RecoveryPassword closeModal={() => setOpenModal(false)} />}
     </styles.MainContainer>
   );
 };

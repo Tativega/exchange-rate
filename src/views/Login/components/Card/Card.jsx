@@ -7,6 +7,7 @@ const Card = ({
   handleRegister,
   handleLogin,
   changeForm,
+  handleModal,
 }) => {
   const history = useHistory();
 
@@ -50,6 +51,9 @@ const Card = ({
               }
             />
             <styles.Button type="submit">SUBMIT</styles.Button>
+            <styles.RecoverButton onClick={() => handleModal(true)}>
+              Recover Password
+            </styles.RecoverButton>
           </styles.LoginCard>
         ) : (
           <styles.RegisterCard isactive={active === "register"}>

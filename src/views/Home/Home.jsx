@@ -1,41 +1,42 @@
 import styles from "./styles";
-// import { useWs } from "./useWs";
-// import { io } from "socket.io-client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 const Home = () => {
-  // const [price, setPrice] = useState("");
-  // const [timeStamp, setTimeStamp] = useState("");
+  const [price, setPrice] = useState("");
+  const [timeStamp, setTimeStamp] = useState("");
+  const currencyPair = "eurusd";
 
   useEffect(() => {
-    const socket = new WebSocket(
-      "ws://stream.tradingeconomics.com/?client=guest:guest"
-    );
-    // const socket = io("wss://stream.tradingeconomics.com/?client=guest:guest");
+    const subscribe = {
+      event: "bts:subscribe",
+      data: {
+        channel: `live_orders_${currencyPair}`,
+      },
+    };
+    const ws = new WebSocket("wss://ws.bitstamp.net");
 
-    console.log(socket);
-    socket.onopen = () => {
-      socket.send({ topic: "subscribe", to: "EURUSD" });
+    ws.onopen = () => {
+      ws.send(JSON.stringify(subscribe));
+    };
+    ws.onmessage = (event) => {
+      const response = JSON.parse(event.data);
+      const { datetime = "", price = "" } = response?.data;
+      if (datetime) {
+        const locale = new Date(datetime * 1000);
+        setTimeStamp(locale.toGMTString());
+      }
+      setPrice(Number.parseFloat(price).toFixed(3));
+    };
+    ws.onclose = () => {
+      ws.close();
     };
 
-    socket.onmessage = (e) => {
-      console.log("e", e);
-      // const { price, dt } = JSON.parse(e.data);
-
-      // // if (price && dt) {
-      // const date = new Date(dt).toLocaleString();
-      // setTimeStamp(date);
-      // setPrice(price);
-      // // }
+    return () => {
+      ws.close();
     };
-
-    // socket.onclose = () => {
-    //   socket.close();
-    // };
   }, []);
-
   return (
     <styles.MainContent>
-      {/* <styles.VideoWrapper>
+      <styles.VideoWrapper>
         <video
           playsInline
           autoPlay
@@ -48,8 +49,9 @@ const Home = () => {
             type="video/mp4"
           />
         </video>
-      </styles.VideoWrapper> */}
-      <h1 style={{ position: "absolute", color: "#000" }}>hola</h1>
+      </styles.VideoWrapper>
+      <styles.Data>{timeStamp}</styles.Data>
+      <styles.Data>1 Euro / {price} Dolar</styles.Data>
     </styles.MainContent>
   );
 };

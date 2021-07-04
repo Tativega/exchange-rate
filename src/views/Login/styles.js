@@ -67,5 +67,4 @@ flex-direction: column;
     
  }
 `
-// eslint-disable-next-line
 export default { MainContainer, FormContainer, Register, Login, Logo }
